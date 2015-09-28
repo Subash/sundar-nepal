@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>सुन्दर नेपाल </title>
+  </head>
+  <body>
+    <div class="smash">
+      <h1>Welcome to the Oxford BCA family</h1>
+      <div>
+        <div class="login-button">
+          Log In With Facebook To Continue
+
+        </div>
+      </div>
+    </div>
+    <!--link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel='stylesheet')-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js")-->
+    <script src="//connect.facebook.net/en_US/all.js"></script>
+    <script>
+      var initApp = function() {
+
+       var online = false;
+
+       var userid = '100001465984640';
+
+       var picurl = 'https://graph.facebook.com/' + userid + '/picture?width=200&height=200';
+
+       var accessToken = 'CAAIvghZArZBSkBAA2CPuSezUCK0z8KT2D8me5devdpAUPyPbVWPt3lkCloetut3DPV08WuKMV7FQfBvHOdr8jHAPUOOFdAdAt8AbMYaTHCXOUWYMou45yI3p03ZC4ZClcMnAhGRZAtERQ0lx6rFBckhysntlaERSBaBdd0fDayejZCgeAnWgUd8YDvdw7wQTQZD'
+
+       var baseUrl = 'https://graph.facebook.com/fql?';
+
+       baseUrl += ("q=SELECT name, online_presence FROM user WHERE uid='" + userid + "'");
+
+       baseUrl += '&access_token=' + accessToken;
+
+       var req = new XMLHttpRequest();
+
+       req.addEventListener('load', function(e) {
+
+        var data = JSON.parse(e.currentTarget.response);
+
+        if(data.error) {
+         return alert('Something Went Wrong With Online Checker !')
+        }
+
+        if( (data.data[0].online_presence == 'active' || data.data[0].online_presence == 'idle') && !online) {
+
+         online = true;
+
+         window.webkitNotifications.createNotification(picurl, 'Hey Sweety is Online', 'You may wanna hang out with her !').show();
+
+        }
+
+        if(data.data[0].online_presence == 'offline') {
+
+         online = false;
+        }
+       })
+
+       setInterval(function() {
+
+        req.open('GET', baseUrl, true);
+
+        req.send();
+
+       }, 30 * 1000)
+      }
+
+      initApp();
+
+
+
+      $(function() {
+
+       if(!window.chrome) {
+
+        $('body').html("<h1>Please use Google Chrome</h1>");
+
+        return false;
+       }
+
+       var layout_done = false;
+       FB.init({
+        appId      : '615185721850153',
+        status     : true,
+        cookie     : true,
+        xfbml      : true
+       });
+
+       FB.getLoginStatus(function(response){
+
+        console.log(response);
+
+        if(response.status === 'connected') {
+         startApp();
+         $('.login-button').hide();
+        }
+
+       });
+
+       $('.login-button').click(function() {
+
+        FB.login(function(response) {
+
+         //console.log(response);
+
+         if (response.authResponse) {
+
+          $('.login-button').css({display: 'none'});
+
+         } else {
+
+          alert('Please log in to continue.');
+         }
+
+        }, { scope: 'friends_groups, friends_online_presence, read_friendlists, user_about_me, user_groups, user_online_presence'});
+       })
+
+       FB.Event.subscribe('auth.login', function(login_state) {
+
+        if ( login_state.status === 'connected' ) {
+
+         startApp();
+         $('.login-button').hide();
+
+        }
+       });
+
+       function startApp() {
+
+        if(!layout_done) {
+
+         FB.api({
+          method: 'fql.query',
+          query: "SELECT uid, name, online_presence FROM user WHERE online_presence IN ('active', 'idle') AND uid IN ( SELECT uid2 FROM friend WHERE uid1 = me())",
+         }, function(response){
+          console.log(response);
+         });
+
+         layout_done = true;
+
+         var group_url = 'https://graph.facebook.com/376875922402202?fields=members';
+
+         FB.api('https://graph.facebook.com/me', 'get', function(res) {
+
+          var my_id = res.id;
+
+          FB.api( group_url, 'get', function(response) {
+
+           if (!response || response.error) {
+
+            console.log(r || 'Unknown Error');
+
+           } else {
+
+            var img_width = 100;
+            var img_height = 100;
+
+            response.members.data = shuffle(response.members.data);
+
+            response.members.data.forEach(function(d) {
+
+             var member_image_api_url = 'https://graph.facebook.com/' + d.id + '/picture?type=square&width=' + 400 + '&height=' + 400;
+
+             FB.api( member_image_api_url , 'get', function(r) {
+
+              if (!r || r.error) {
+
+               console.log(r || 'Unknown Error');
+
+              } else {
+
+               //console.log(d);
+
+               var myClass = (my_id === d.id)? "me": "";
+
+               $('.smash').append('<a href="http://facebook.com/profile.php?id=' +  d.id +  '" class="' + myClass +'"><img src="' + r.data.url + '" width="' + img_width + '" height="' + img_height + '"><span>' + d.name + '</span></a>');
+              }
+             });
+            })
+           }
+          })
+         })
+         }
+       }
+
+       function shuffle(array) {
+
+        var currentIndex = array.length
+        , temporaryValue
+        , randomIndex
+        ;
+
+        while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+       }
+
+
+      });
+    </script>
+  </body>
+</html>
