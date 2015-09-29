@@ -52,7 +52,7 @@ class App extends Component {
       util.postToFacebook({
         accessToken: this.state.userDetails.accessToken,
         image: util.dataURItoBlob(this.state.userImageUrl),
-        message: 'Get your pic with Nepalese flag and make profile picture at http://sundar-nepal.subash.me',
+        message: 'Get your pic with Nepalese flag and from http://sundar-nepal.subash.me',
         userID: this.state.userDetails.userID
       }).then(() => {
         alert('Posted Successfully');
@@ -116,6 +116,11 @@ class App extends Component {
     return (
       <div className="container">
         <ImageBox src={userImageUrl || defaultImageUrl}>{imageBoxContent}</ImageBox>
+        <div className="alert alert-info">
+          * This app is currently being reviewed by Facebook so If you see forbidden message please download manually and upload. <br />
+          * Tested only in latest version of Chrome and Firefox. <br />
+          * Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a>
+        </div>
       </div>
     )
   }
