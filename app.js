@@ -52,7 +52,7 @@ class App extends Component {
       util.postToFacebook({
         accessToken: this.state.userDetails.accessToken,
         image: util.dataURItoBlob(this.state.userImageUrl),
-        message: 'Get your pic with Nepalese flag and from http://sundar-nepal.subash.me',
+        message: 'Get your pic with Nepalese flag from http://sundar-nepal.subash.me',
         userID: this.state.userDetails.userID
       }).then(() => {
         alert('Posted Successfully');
