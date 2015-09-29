@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import * as util from './util.js';
+import 'babel/polyfill';
 
 class App extends Component {
 
