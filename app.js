@@ -108,7 +108,6 @@ class App extends Component {
     } else {
       imageBoxContent = (
         <div className="post">
-          <button onClick={this.postToFacebook} className="btn btn-default">Post to Facebook</button>{'  '}
           <a className="btn btn-default" href={userImageUrl} download="profile-nepal.jpg">Download</a>
         </div>
       );
