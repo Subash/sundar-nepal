@@ -24,7 +24,7 @@ class App extends Component {
     this.state.userImageUrl = null;
     this.state.error = false;
     const profileImageUrl = encodeURIComponent(`https://graph.facebook.com/${this.state.userDetails.userID}/picture?width=800&height=800`);
-    util.mergeImages(`/proxy-image-app-np?url=${profileImageUrl}`, 'flag.png')
+    util.mergeImages(`/proxy-image-app-np?url=${profileImageUrl}&rand=${Math.random()}`, 'flag.png')
       .then((image) => {
         this.state.userImageUrl = image;
         this.setState(this.state);
@@ -116,7 +116,7 @@ class App extends Component {
     return (
       <div className="container">
         <ImageBox src={userImageUrl || defaultImageUrl}>{imageBoxContent}</ImageBox>
-        <div className="alert alert-info">
+        <div className="alert alert-info footer-info">
           * This app is currently being reviewed by Facebook so If you see forbidden message please download manually and upload. <br />
           * Tested only in latest version of Chrome and Firefox. <br />
           * Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a>
