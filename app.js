@@ -117,7 +117,7 @@ class App extends Component {
       <div className="container">
         <ImageBox src={userImageUrl || defaultImageUrl}>{imageBoxContent}</ImageBox>
         <div className="alert alert-info footer-info">
-          * This app is currently being reviewed by Facebook so If you see forbidden message please download manually and upload. <br />
+          * This app is currently being reviewed by Facebook so If you are seeing "Forbidden" message while posting, please download the picture manually then upload. <br />
           * Tested only in latest version of Chrome and Firefox. <br />
           * Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a>
         </div>
