@@ -120,9 +120,11 @@ class App extends Component {
           <div className="fb-like" data-href="http://sundar-nepal.subash.me/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
         </div>
         <div className="alert alert-info footer-info">
-          * This app is currently being reviewed by Facebook so If you are seeing "Forbidden" message while posting, please download the picture manually then upload. <br />
-          * Tested only in latest version of Chrome and Firefox. <br />
-          * Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a>
+          <ul>
+            <li>Made by, <a href="http://twitter.com/sbspk"><i className="fa fa-twitter"></i> @sbspk</a>, <a href="https://facebook.com/return.undefined"><i className="fa fa-facebook"></i> Subash Pathak</a></li>
+            <li>Tested only in latest version of Chrome and Firefox. </li>
+            <li>Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a> </li>
+          </ul>
         </div>
       </div>
     )
