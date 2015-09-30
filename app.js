@@ -116,6 +116,9 @@ class App extends Component {
     return (
       <div className="container">
         <ImageBox src={userImageUrl || defaultImageUrl}>{imageBoxContent}</ImageBox>
+        <div className="social">
+          <div className="fb-like" data-href="http://sundar-nepal.subash.me/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+        </div>
         <div className="alert alert-info footer-info">
           * This app is currently being reviewed by Facebook so If you are seeing "Forbidden" message while posting, please download the picture manually then upload. <br />
           * Tested only in latest version of Chrome and Firefox. <br />

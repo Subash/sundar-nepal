@@ -21,3 +21,16 @@
   max-width: 500px;
   margin: auto;
 }
+
+.social {
+  text-align: center;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.social .fb-like {
+  width: 200px;
+  margin-auto;
+}
