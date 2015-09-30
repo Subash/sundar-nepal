@@ -117,7 +117,7 @@ class App extends Component {
       <div className="container">
         <ImageBox src={userImageUrl || defaultImageUrl}>{imageBoxContent}</ImageBox>
         <div className="social">
-          <div className="fb-like" data-href="http://sundar-nepal.subash.me/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+          <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsundar-nepal.subash.me&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameBorder="0" style={{ border: 'none', overflow: 'hidden', width: 100, height: 21 }} allowTransparency="true"></iframe>
         </div>
         <div className="alert alert-info footer-info">
           <ul>
